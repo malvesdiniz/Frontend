@@ -1,10 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Winkel } from '../../models/winkel';
-import { WinkelService } from '../../services/winkel.service';
 import { Groente } from '../../models/groente';
-import { GroenteService } from '../../services/groente.service';
-import { WinkelMandjeService } from '../../services/winkel-mandje.service';
 import { MandjeItem } from '../../models/mandje-item';
 
 @Component({
@@ -17,7 +14,13 @@ import { MandjeItem } from '../../models/mandje-item';
           <div class="bestel-form-selectItem winkel">
             <label for="winkel">Kies winkel: </label>
             <select formControlName="winkel" id="winkel">
-              <option *ngFor="let winkel of winkels; let i = index" [value]="i">
+              <option
+                *ngFor="let winkel of winkels; let i = index"
+                [value]="i"
+                [title]="
+                  winkel.adres + ', ' + winkel.post + ' ' + winkel.gemeente
+                "
+              >
                 {{ winkel.naam }}
               </option>
             </select>
