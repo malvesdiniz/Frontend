@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MandjeItem } from '../../models/mandje-item';
 
 @Component({
@@ -8,16 +8,21 @@ import { MandjeItem } from '../../models/mandje-item';
       {{ mandjeItem.winkel.naam }}
     </td>
     <td class="winkelmandje-item-Groente">{{ mandjeItem.groente.naam }}</td>
-    <td class="winkelmandje-item-Stuk">{{ mandjeItem.stuk }}</td>
+    <td class="winkelmandje-item-Stuk" onclick="">{{ mandjeItem.stuk }}</td>
+    <td class="winkelmandje-item-Stuk"><input type="number" /></td>
     <td class="winkelmandje-item-Prijs">
       {{ this.munt }} {{ mandjeItem.prijs }}
     </td>
     <td class="winkelmandje-item-TotaalPrijs">
       {{ this.munt }} {{ mandjeItem.totaalPrijs }}
     </td>
+    <td><button (click)="deleteItem(mandjeItem.id)">DELETE</button></td>
   `,
   styles: [
     `
+      input {
+        width: 30px;
+      }
       winkelmandje-item {
         width: 100%;
       }
@@ -44,5 +49,13 @@ export class WinkelmandjeItemComponent {
   @Input() mandjeItem!: MandjeItem;
   @Input() totaal!: number;
   @Input() munt!: string;
+  @Output() deleteMandjeItem = new EventEmitter<number>();
+
   constructor() {}
+
+  deleteItem(id: number | undefined) {
+    this.deleteMandjeItem.emit(id);
+  }
+
+  aantalWisselen() {}
 }

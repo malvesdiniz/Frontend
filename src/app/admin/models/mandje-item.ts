@@ -2,8 +2,8 @@ import { Groente } from './groente';
 import { Winkel } from './winkel';
 
 export class MandjeItem {
+  public id?: number;
   constructor(
-    public id: number,
     public winkel: Winkel,
     public groente: Groente,
     public stuk: number,

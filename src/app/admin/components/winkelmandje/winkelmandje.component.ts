@@ -30,6 +30,7 @@ import { MuntService } from '../../services/munt.service';
           <winkelmandje-item
             [mandjeItem]="item"
             [munt]="munt"
+            (deleteMandjeItem)="deleteItem($event)"
           ></winkelmandje-item>
         </tr>
         <tr *ngIf="mandjeItems[0]" class="totaal">
@@ -62,6 +63,11 @@ export class WinkelmandjeComponent {
   @Input() totaal!: number;
   @Input() munt!: string;
   @Output() muntWisselen = new EventEmitter();
+  @Output() deleteMandjeItem = new EventEmitter<number>();
 
   constructor() {}
+
+  deleteItem(id: number) {
+    this.deleteMandjeItem.emit(id);
+  }
 }

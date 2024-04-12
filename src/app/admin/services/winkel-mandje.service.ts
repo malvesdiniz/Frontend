@@ -1,7 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Groente } from '../models/groente';
-import { Winkel } from '../models/winkel';
 import { MandjeItem } from '../models/mandje-item';
 import { Observable } from 'rxjs';
 
@@ -25,6 +23,12 @@ export class WinkelMandjeService {
   getTotaal(): Observable<number> {
     return this.http.get<number>(
       `https://localhost:7135/api/MandjeItem/totaal`
+    );
+  }
+
+  deleteMandjeItem(id: number): Observable<MandjeItem[]> {
+    return this.http.delete<MandjeItem[]>(
+      `https://localhost:7135/api/MandjeItem/${id}`
     );
   }
 }

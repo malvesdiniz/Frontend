@@ -125,8 +125,6 @@ export class BestelformulierComponent implements OnInit {
   @Input() munt!: string;
   @Output() mandjeItem = new EventEmitter<MandjeItem>();
 
-  id: number = 1;
-
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
@@ -140,7 +138,6 @@ export class BestelformulierComponent implements OnInit {
   submit() {
     if (this.bestelForm.valid) {
       let item = new MandjeItem(
-        this.id,
         this.winkels[this.bestelForm.value.winkel],
         this.groenten[this.bestelForm.value.groenten],
         this.bestelForm.value.aantal,

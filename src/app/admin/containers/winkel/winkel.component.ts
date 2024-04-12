@@ -23,6 +23,7 @@ import { MuntService } from '../../services/munt.service';
       [mandjeItems]="mandjeItems"
       [totaal]="totaal"
       [munt]="munt"
+      (deleteMandjeItem)="deleteMandjeItem($event)"
     ></winkelmandje>
   `,
   styles: [],
@@ -93,6 +94,14 @@ export class WinkelComponent implements OnInit {
       this.getMunt();
       this.getTotaal();
       this.mandjeItems = mandjeItems;
+    });
+  }
+
+  deleteMandjeItem(id: number) {
+    this.winkelMandjeService.deleteMandjeItem(id).subscribe((mandjeItems) => {
+      this.mandjeItems = mandjeItems;
+      this.getMunt();
+      this.getTotaal();
     });
   }
 }
