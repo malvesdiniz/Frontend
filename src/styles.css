@@ -1,1 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+tr {
+  border-bottom: 1px solid #ccc;
+}
+td {
+  padding: 5px;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+select {
+  width: 300px;
+}
+
+label {
+  width: 200px;
+  text-align: left;
+  margin-right: 10px;
+}
