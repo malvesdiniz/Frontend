@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, numberAttribute } from '@angular/core';
 import { Winkel } from '../../models/winkel';
 import { Groente } from '../../models/groente';
 import { MandjeItem } from '../../models/mandje-item';
@@ -10,8 +10,16 @@ import { MuntService } from '../../services/munt.service';
 @Component({
   selector: 'winkel',
   template: `
-    <h1>Groentenwinkelketen de vrolijke konijntjas</h1>
-    <p>Bestal nu, geleverd binnen het uur!</p>
+    <div>
+      <header>
+        <div class="page-title">
+          <img src="../../../../../assets/img/logo.png" width="150px" />
+          <h1>Groentenwinkelketen de vrolijke konijntjas</h1>
+        </div>
+        <p>Bestal nu, geleverd binnen het uur!</p>
+      </header>
+    </div>
+
     <bestelformulier
       [winkels]="winkels"
       [groenten]="groenten"
@@ -19,14 +27,45 @@ import { MuntService } from '../../services/munt.service';
       [munt]="munt"
     ></bestelformulier>
     <winkelmandje
+      *ngIf="mandjeItems.length > 0"
       (muntWisselen)="muntWisselen()"
       [mandjeItems]="mandjeItems"
       [totaal]="totaal"
       [munt]="munt"
       (deleteMandjeItem)="deleteMandjeItem($event)"
+      (wisselMandjeItem)="aantalWisselen($event.id, $event.aantal)"
     ></winkelmandje>
   `,
-  styles: [],
+  styles: [
+    `
+      :host {
+        margin: 40px;
+      }
+
+      header {
+        color: #b77e7b;
+        background-color: #f4cbc6;
+        margin: 0;
+        margin-bottom: 30px;
+        padding: 50px;
+        padding-bottom: 10px;
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .page-title {
+        width: 85%;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 50px;
+      }
+
+      header p {
+        padding-left: 80%;
+      }
+    `,
+  ],
 })
 export class WinkelComponent implements OnInit {
   winkels: Winkel[] = [];
@@ -103,5 +142,15 @@ export class WinkelComponent implements OnInit {
       this.getMunt();
       this.getTotaal();
     });
+  }
+
+  aantalWisselen(id: number, aantal: number) {
+    this.winkelMandjeService
+      .aantalWisselen(id, aantal)
+      .subscribe((mandjeItems) => {
+        this.mandjeItems = mandjeItems;
+        this.getMunt();
+        this.getTotaal();
+      });
   }
 }

@@ -31,4 +31,11 @@ export class WinkelMandjeService {
       `https://localhost:7135/api/MandjeItem/${id}`
     );
   }
+
+  aantalWisselen(id: number, aantal: number): Observable<MandjeItem[]> {
+    return this.http.put<MandjeItem[]>(
+      `https://localhost:7135/api/MandjeItem/changeAantal/${id}`,
+      aantal
+    );
+  }
 }

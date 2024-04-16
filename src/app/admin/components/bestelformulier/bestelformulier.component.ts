@@ -24,16 +24,17 @@ import { MandjeItem } from '../../models/mandje-item';
                 {{ winkel.naam }}
               </option>
             </select>
-            <span
-              class="validatie"
-              class="validatie"
-              *ngIf="
-                bestelForm.get('winkel')?.invalid &&
-                bestelForm.get('winkel')?.touched
-              "
-              >Er moet een winkel geselecteerd zijn</span
-            >
           </div>
+
+          <span
+            class="validatie"
+            class="validatie"
+            *ngIf="
+              bestelForm.get('winkel')?.invalid &&
+              bestelForm.get('winkel')?.touched
+            "
+            >Er moet een winkel geselecteerd zijn</span
+          >
           <div class="bestel-form-selectItem groente">
             <label for="groenten">Kies groenten: </label>
 
@@ -73,6 +74,7 @@ import { MandjeItem } from '../../models/mandje-item';
           >
         </div>
       </div>
+
       <div>
         <button
           type="submit"
@@ -86,34 +88,69 @@ import { MandjeItem } from '../../models/mandje-item';
   `,
   styles: [
     `
+      :host {
+        font-size: 18px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: solid 1px;
+        border-radius: 20px;
+        width: 700px;
+        padding: 30px 0;
+        margin: 50px auto;
+        background-color: #f4cbc6;
+        gap: 20px;
+      }
+
       .bestel {
         display: flex;
         flex-direction: column;
+        align-items: center;
       }
 
       .bestel-form {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
       }
 
       .bestel-form-select {
         display: flex;
         flex-direction: column;
+        gap: 20px;
       }
       .bestel-form-selectItem {
         display: flex;
         justify-content: left;
         flex-wrap: nowrap;
         gap: 10px;
-        padding-bottom: 10px;
+        padding-bottom: 15px;
         padding-right: 20px;
       }
 
+      .bestel-form-inputItem {
+        display: flex;
+        padding-bottom: 35px;
+      }
       input {
-        width: 50px;
+        width: 40px;
+        height: 20px;
       }
       .validatie {
-        font-size: 8px;
+        font-size: 12px;
+        position: absolute;
+        transform: translateY(120%);
+        background-color: #f7ecea;
+        padding: 5px;
+        border-radius: 5px;
+        font-weight: bold;
+        color: #c90076;
+      }
+      button {
+        font-size: 25px;
+        width: 200px;
+        height: 50px;
       }
     `,
   ],

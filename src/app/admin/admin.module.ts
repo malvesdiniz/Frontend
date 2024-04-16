@@ -18,10 +18,6 @@ import { MuntService } from './services/munt.service';
 import { WinkelService } from './services/winkel.service';
 import { WinkelComponent } from './containers/winkel/winkel.component';
 
-//guards
-
-//directives
-
 @NgModule({
   declarations: [
     WinkelComponent,
